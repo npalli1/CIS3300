@@ -1,19 +1,17 @@
-package sample;
+package Backend;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -49,6 +47,29 @@ public class Main extends Application {
         primaryStage.setTitle ( "P&N Enterprise" );
         primaryStage.setScene ( start );
         primaryStage.show ();
+
+
+        login.setOnAction ( e -> {
+            try {
+                boolean isEmp = Employee.isEmployee
+                        (Integer.parseInt (userIdTextField.getText ()),Integer.parseInt (  pinTextField.getText ()) );
+                if(isEmp == true) {
+                    System.out.println ( "You are logged in!!!" );
+                }
+                else{
+                    Alert alert = new Alert( Alert.AlertType.ERROR);
+                    alert.setTitle ( "Warning" );
+                    alert.setHeaderText ( "Invalid Input!" );
+                    alert.setContentText ( "Please Enter Correct Username and Password" );
+                    alert.showAndWait ();
+                    System.out.println ("You are not logged in :(");
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace ();
+            }
+        } );
+
+
 
 
     }

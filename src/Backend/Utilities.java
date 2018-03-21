@@ -1,4 +1,4 @@
-package sample;
+package Backend;
 
 import java.sql.*;
 
@@ -20,6 +20,7 @@ public class Utilities {
 
 
             System.out.println("connection successful");
+
             return connection;
 
         }
