@@ -12,7 +12,7 @@ public class Employee {
 
     int empId;
     int pin;
-    String firstName;
+    public static String firstName;
     String lastName;
     String title;
     boolean isAdmin;
@@ -96,5 +96,34 @@ public class Employee {
         }
 
         return isEmployee;
+    }
+
+    public static void getUserName(int empId) throws SQLException {
+
+        try {
+            Connection con = Utilities.getConnection ();
+
+            PreparedStatement stmt = con.prepareStatement
+                    ( "SELECT firstName FROM EMPLOYEE WHERE empId = ?" );
+            stmt.setInt(1, empId) ;
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+
+                    firstName = rs.getString ( 1 );
+            }
+
+        }catch(Exception e){
+
+            System.out.println (e);
+
+        }
+
+        finally {
+
+            Utilities.connection.close ();
+        }
+
     }
 }
