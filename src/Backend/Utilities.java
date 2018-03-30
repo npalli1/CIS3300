@@ -16,7 +16,7 @@ public class Utilities {
 
         try{
 
-            connection = DriverManager.getConnection ( "jdbc:mysql://35.231.10.84/CIS3300", user, passwd );
+            connection = DriverManager.getConnection ( "jdbc:mysql://35.231.10.84/CIS3300?autoReconnect=true&useSSL=false", user, passwd );
 
 
             System.out.println("connection successful");
