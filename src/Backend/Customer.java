@@ -1,6 +1,8 @@
 package Backend;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -8,7 +10,7 @@ import java.sql.SQLException;
  */
 public class Customer {
 
-    private int custId;
+    public static int custId;
     private String firstName;
     private String lastName;
     private String phone;
@@ -90,12 +92,13 @@ public class Customer {
         this.zip = zip;
     }
 
-    public static void createCustomer(String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) throws SQLException {
+    public static void createCustomer(String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) throws Exception {
 
-        String query = "INSERT INTO users " + "(firstName, ,lastName, phone, email, address, city, state, zip) VALUES " +
-                "(?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO CUSTOMER " + "( firstName, lastName, phone, email, address, city, state, zip) VALUES " +
+                "(?,?,?,?,?,?,?,?)";
 
-        PreparedStatement ps = Utilities.connection.prepareStatement(query);
+        Connection con = Utilities.getConnection ();
+        PreparedStatement ps = con.prepareStatement(query);
 
         ps.setString(1, firstName);
         ps.setString(2, lastName);
@@ -107,6 +110,43 @@ public class Customer {
         ps.setString(8, zip );
 
         ps.execute ();
+
+    }
+
+    public static void findCustomerLastName(String name) throws Exception {
+
+        String query = "SELECT custId FROM CUSTOMER WHERE lastName = ?";
+
+        Connection con = Utilities.getConnection ();
+
+        PreparedStatement ps = con.prepareStatement ( query );
+
+        ps.setString ( 1,name);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+            System.out.println ( rs.getString ( 1 ));
+        }
+
+    }
+
+    public static void findCustomerPhone(String phone) throws Exception {
+
+        Connection con = Utilities.getConnection ();
+
+        String query = "SELECT custId FROM CUSTOMER WHERE phone = ?";
+
+        PreparedStatement ps = con.prepareStatement ( query );
+
+        ps.setString ( 1,phone );
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+            custId = rs.getInt(1);
+            System.out.println (custId);
+        }
 
     }
 }

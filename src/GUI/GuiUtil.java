@@ -29,7 +29,7 @@ public class GuiUtil {
         Button logout = new Button("Logout");
 
         vbright.getChildren ().addAll ( user, main, logout );
-        vbright.setAlignment ( Pos.TOP_RIGHT );
+        vbright.setAlignment ( Pos.TOP_CENTER );
 
         hb.getChildren ().addAll(logo, vbright);
         hb.setPadding ( new Insets ( 20 ) );

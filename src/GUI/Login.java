@@ -1,5 +1,6 @@
 package GUI;
 
+import Backend.Customer;
 import Backend.Employee;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

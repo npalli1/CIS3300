@@ -27,11 +27,13 @@ public class Main extends Application {
         primaryStage.setTitle ( "P&N Enterprise" );
         primaryStage.setScene ( start );
         primaryStage.show ();
+
     }
 
     public static void main(String[] args) throws Exception {
 
-        launch(args);
+       launch(args);
+
 
     }
 }
