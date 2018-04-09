@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * Created by nikhilpalli on 3/27/18.
@@ -20,7 +21,7 @@ public class GuiUtil {
 
         HBox hb = new HBox ( 500 );
 
-        HBox vbright= new HBox ( 20 );
+        HBox hbright= new HBox ( 20 );
 
         Label logo = new Label ( "P&N Enterprise" );
         logo.setStyle ( "-fx-font-size: 48pt" );
@@ -28,10 +29,13 @@ public class GuiUtil {
         Button main = new Button("Main Menu");
         Button logout = new Button("Logout");
 
-        vbright.getChildren ().addAll ( user, main, logout );
-        vbright.setAlignment ( Pos.TOP_CENTER );
+        //main.setOnAction ( event -> {Home.displayHome ();});
 
-        hb.getChildren ().addAll(logo, vbright);
+
+        hbright.getChildren ().addAll ( user, main, logout );
+        hbright.setAlignment ( Pos.CENTER );
+
+        hb.getChildren ().addAll(logo, hbright);
         hb.setPadding ( new Insets ( 20 ) );
         hb.setAlignment ( Pos.TOP_CENTER);
 

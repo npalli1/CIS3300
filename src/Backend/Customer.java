@@ -1,5 +1,7 @@
 package Backend;
 
+import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -94,23 +96,43 @@ public class Customer {
 
     public static void createCustomer(String firstName, String lastName, String phone, String email, String address, String city, String state, String zip) throws Exception {
 
-        String query = "INSERT INTO CUSTOMER " + "( firstName, lastName, phone, email, address, city, state, zip) VALUES " +
-                "(?,?,?,?,?,?,?,?)";
 
-        Connection con = Utilities.getConnection ();
-        PreparedStatement ps = con.prepareStatement(query);
+        try {
 
-        ps.setString(1, firstName);
-        ps.setString(2, lastName);
-        ps.setString(3, phone);
-        ps.setString(4, email);
-        ps.setString(5, address);
-        ps.setString(6, city);
-        ps.setString(7, state);
-        ps.setString(8, zip );
+            String query = "INSERT INTO CUSTOMER " + "( firstName, lastName, phone, email, address, city, state, zip) VALUES " +
+                    "(?,?,?,?,?,?,?,?)";
 
-        ps.execute ();
+            Connection con = Utilities.getConnection ();
+            PreparedStatement ps = con.prepareStatement ( query );
 
+            ps.setString ( 1, firstName );
+            ps.setString ( 2, lastName );
+            ps.setString ( 3, phone );
+            ps.setString ( 4, email );
+            ps.setString ( 5, address );
+            ps.setString ( 6, city );
+            ps.setString ( 7, state );
+            ps.setString ( 8, zip );
+
+            ps.execute ();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("User Status");
+            alert.setContentText(firstName + " " + lastName + " has been added to the database!" );
+
+            alert.showAndWait();
+
+        } catch (Exception e){
+            e.printStackTrace ();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("User Already Exists");
+            alert.setContentText("The user has already been registered into database");
+
+            alert.showAndWait();
+        }
     }
 
     public static void findCustomerLastName(String name) throws Exception {
